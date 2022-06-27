@@ -25,8 +25,11 @@ public class Main {
             Having 2 beans of same class type returns 'NoUniqueBeanFoundException'...
             To overcome this we need to specify the bean name as well as its type in the getBean method.
          */
-        Vehicle vehicle1 = context.getBean("anotherVehicle", Vehicle.class);
+        Vehicle vehicle1 = context.getBean("BMW_Car", Vehicle.class);
         System.out.println("Vehicle name from the Spring Context is : " + vehicle1.getName());
+
+        Vehicle vehicle2 = context.getBean("Lamborghini_Car", Vehicle.class);
+        System.out.println("Vehicle name from the Spring Context is : " + vehicle2.getName());
 
         /*
             We do not need to do any explicit casting while fetching a bean from context. Spring is smart enough to look

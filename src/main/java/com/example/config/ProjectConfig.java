@@ -16,17 +16,24 @@ public class ProjectConfig {
         @Bean annotation which lets Spring know that it needs to call this method when it initializes its context and
               adds the returned value to the context.
      */
-    @Bean
+    @Bean(value="BMW_Car")
     Vehicle vehicle() {
         var vehicle  = new Vehicle();
         vehicle.setName("BMW Urus");
         return vehicle;
     }
 
-    @Bean
+    @Bean(name="Maruti_Car")
     Vehicle anotherVehicle() {
         var vehicle = new Vehicle();
         vehicle.setName("Maruti 800");
+        return vehicle;
+    }
+
+    @Bean("Lamborghini_Car")
+    Vehicle anotherAnotherVehicle() {
+        var vehicle = new Vehicle();
+        vehicle.setName("Lamborghini");
         return vehicle;
     }
 
@@ -39,7 +46,6 @@ public class ProjectConfig {
     String hello() {
         return "Hello World";
     }
-
 
     @Bean
     Integer number() {

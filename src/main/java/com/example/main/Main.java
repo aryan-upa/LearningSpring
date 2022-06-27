@@ -21,7 +21,11 @@ public class Main {
          */
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
 
-        Vehicle vehicle1 = context.getBean(Vehicle.class);
+        /*
+            Having 2 beans of same class type returns 'NoUniqueBeanFoundException'...
+            To overcome this we need to specify the bean name as well as its type in the getBean method.
+         */
+        Vehicle vehicle1 = context.getBean("anotherVehicle", Vehicle.class);
         System.out.println("Vehicle name from the Spring Context is : " + vehicle1.getName());
 
         /*

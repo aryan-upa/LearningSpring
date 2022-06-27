@@ -23,6 +23,13 @@ public class ProjectConfig {
         return vehicle;
     }
 
+    @Bean
+    Vehicle anotherVehicle() {
+        var vehicle = new Vehicle();
+        vehicle.setName("Maruti 800");
+        return vehicle;
+    }
+
     /**
         hello method is used to return the "hello world" string to the caller.
         The method names usually follow verbs notation. But, for methods which we will use to create beans, can use

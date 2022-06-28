@@ -25,7 +25,7 @@ public class ProjectConfig {
     @Bean(value="BMW_Car")
     Vehicle vehicle() {
         var vehicle  = new Vehicle();
-        vehicle.setName("BMW Urus");
+        vehicle.setName("BMW");
         return vehicle;
     }
 

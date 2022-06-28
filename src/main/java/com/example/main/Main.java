@@ -84,6 +84,7 @@ public class Main {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("passenger").append(i);
             int choice = random.nextInt(1,3);
+            // Using registerBean method we can create beans programmatically in an IOC Container.
             if(choice == 1)
                 context.registerBean(stringBuilder.toString(), Passenger.class, passengerSupplier1);
             else

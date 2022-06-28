@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
 public class Driver {
     private String name;
 
+    public Driver() {
+        // Using in place of @PostConstruct, yet this is not a valid way of doing so.
+        initialize();
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -22,5 +27,10 @@ public class Driver {
 
     public void printAbout() {
         System.out.println("I am a Driver, I drive vehicles.");
+    }
+
+    public void initialize() {
+        // In the newer versions of Spring Framework, the @PostConstruct annotation is removed.
+        setName("Undefined");
     }
 }

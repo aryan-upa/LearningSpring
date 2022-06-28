@@ -2,6 +2,7 @@ package com.example.config;
 
 import com.example.beans.Vehicle;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
@@ -9,8 +10,12 @@ import org.springframework.context.annotation.Primary;
     @Configuration This annotation is part of the spring core framework. This annotation indicates that the class has @Bean
                     definition methods. So Spring can process the class and generate Spring Beans to be used in the
                     application.
+    @ComponentScan This tag helps the Spring to identify where does it have to look in order to find classes whose beans
+                    should be created. The classes here can have @Component annotation which indicates that a bean of
+                   this class should be created and be made available in the Spring IOC Container.
  */
 @Configuration
+@ComponentScan(basePackages = "com.example.beans")
 public class ProjectConfig {
 
     /**

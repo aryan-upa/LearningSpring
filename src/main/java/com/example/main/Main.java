@@ -1,5 +1,6 @@
 package com.example.main;
 
+import com.example.beans.Driver;
 import com.example.beans.Vehicle;
 import com.example.config.ProjectConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -40,6 +41,10 @@ public class Main {
         System.out.println("Value obtained from the string context is : " + hello);
         var number = context.getBean(Integer.class);
         System.out.println("Value obtained from the string context is : " + number);
+
+        Driver driver = context.getBean(Driver.class);
+        System.out.println("Driver name is : " + driver.getName());
+        driver.printAbout();
 
     }
 

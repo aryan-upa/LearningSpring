@@ -3,6 +3,7 @@ package com.example.beans;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /*
     @Component : This annotation is crucial to working of Spring. It tells the framework that a Bean of this class
@@ -33,5 +34,14 @@ public class Driver {
     @PostConstruct
     public void initialize() {
         setName("Undefined");
+    }
+
+    /*
+        The @PreDestroy Annotation is used to do some work before the bean is destroyed. A Bean is destroyed when it's
+        context is closed.
+     */
+    @PreDestroy
+    public void doEndOfSession() {
+        System.out.println("Driver is going home now.");
     }
 }

@@ -46,6 +46,7 @@ public class Main {
         System.out.println("Driver name is : " + driver.getName());
         driver.printAbout();
 
+        context.close();
     }
 
 }

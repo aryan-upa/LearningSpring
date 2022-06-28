@@ -1,9 +1,14 @@
 package com.example.main;
 
 import com.example.beans.Driver;
+import com.example.beans.Passenger;
 import com.example.beans.Vehicle;
 import com.example.config.ProjectConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.Map;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -46,7 +51,44 @@ public class Main {
         System.out.println("Driver name is : " + driver.getName());
         driver.printAbout();
 
+        addPassengers(context);
+
+        Map<String, Passenger> passengers = context.getBeansOfType(Passenger.class);
+        System.out.println("The vehicle has " + passengers.size() + " passenger(s).");
+        for (String name : passengers.keySet())
+            System.out.println("Passenger : " + name +", has gender : " + passengers.get(name).getGender() + ".");
+
         context.close();
+    }
+
+    static void addPassengers(AnnotationConfigApplicationContext context) {
+
+        Supplier<Passenger> passengerSupplier1 = () -> {
+            Passenger passenger = new Passenger();
+            passenger.setName("Passenger 1");
+            passenger.setGender(Passenger.Gender.MALE);
+            return passenger;
+        };
+
+        Supplier<Passenger> passengerSupplier2 = () -> {
+            Passenger passenger = new Passenger();
+            passenger.setName("Passenger 2");
+            passenger.setGender(Passenger.Gender.FEMALE);
+            return passenger;
+        };
+
+        Random random = new Random();
+        int numberOfPassenger = random.nextInt(1,5);
+
+        for (int i = 0; i < numberOfPassenger; i++) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("passenger").append(i);
+            int choice = random.nextInt(1,3);
+            if(choice == 1)
+                context.registerBean(stringBuilder.toString(), Passenger.class, passengerSupplier1);
+            else
+                context.registerBean(stringBuilder.toString(), Passenger.class, passengerSupplier2);
+        }
     }
 
 }

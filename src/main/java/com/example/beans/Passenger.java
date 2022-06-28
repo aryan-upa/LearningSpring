@@ -1,7 +1,5 @@
 package com.example.beans;
 
-import javax.annotation.PostConstruct;
-
 public class Passenger {
 
     private String name;

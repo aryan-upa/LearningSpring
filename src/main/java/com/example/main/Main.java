@@ -35,7 +35,8 @@ public class Main {
         System.out.println("Vehicle name from the Spring Context is : " + vehicle1.getName());
 
         Vehicle vehicle2 = context.getBean("Lamborghini_Car", Vehicle.class);
-        System.out.println("Vehicle name from the Spring Context is : " + vehicle2.getName());
+        System.out.println("Vehicle name from the Spring Context is : " + vehicle2.getName() +
+                ", Registration number : " + vehicle2.getRegistration().getRegistrationNumber());
 
         /*
             We do not need to do any explicit casting while fetching a bean from context. Spring is smart enough to look

@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.beans.Registration;
 import com.example.beans.Vehicle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,6 +27,7 @@ public class ProjectConfig {
     Vehicle vehicle() {
         var vehicle  = new Vehicle();
         vehicle.setName("BMW");
+        vehicle.setRegistration(registration());
         return vehicle;
     }
 
@@ -33,6 +35,7 @@ public class ProjectConfig {
     Vehicle anotherVehicle() {
         var vehicle = new Vehicle();
         vehicle.setName("Maruti 800");
+        vehicle.setRegistration(registration());
         return vehicle;
     }
 
@@ -47,6 +50,7 @@ public class ProjectConfig {
     Vehicle anotherAnotherVehicle() {
         var vehicle = new Vehicle();
         vehicle.setName("Lamborghini");
+        vehicle.setRegistration(registration());
         return vehicle;
     }
 
@@ -63,5 +67,12 @@ public class ProjectConfig {
     @Bean
     Integer number() {
         return 16;
+    }
+
+    @Bean
+    Registration registration() {
+        Registration registration = new Registration();
+        registration.setRegistrationNumber("IND XX 0000XX");
+        return registration;
     }
 }

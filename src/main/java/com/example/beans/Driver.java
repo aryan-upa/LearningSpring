@@ -1,5 +1,6 @@
 package com.example.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,22 @@ import javax.annotation.PreDestroy;
 public class Driver {
     private String name;
 
+    /*
+        The @Autowired annotation marks on a field, constructor, Setter method is used to auto-wire the beans that is
+        'injecting beans' (Objects) at runtime by Spring Dependency Injection mechanism.
+
+        But, the issue is that when we autowire a field, we can not make it final as it would not have been initialized
+        until the run-time.
+
+        We can do this, because our Vehicle beans are already defined with @Bean annotation in the ProjectConfig class.
+
+        If in any-case we have no issue in bean not forming until the time of creation of Driver Bean, ie the presence
+        of Vehicle bean is not mandatory then we can annotate the field with @Autowired but with required flag set to
+        false.
+     */
+    @Autowired()
+    private final Vehicle vehicle;
+
     public void setName(String name) {
         this.name = name;
     }
@@ -24,7 +41,7 @@ public class Driver {
     }
 
     public void printAbout() {
-        System.out.println("I am a Driver, I drive vehicles.");
+        System.out.println("I am a Driver, I drive " + vehicle.getName() +".");
     }
 
     /*
@@ -43,5 +60,13 @@ public class Driver {
     @PreDestroy
     public void doEndOfSession() {
         System.out.println("Driver is going home now.");
+    }
+
+    Driver(Vehicle vehicle) {
+        /*
+            In our case there is no 'NoUniqueBeanDefinitionException', as although there are multiple beans of vehicle
+            type, we have a @Primary bean ("Lamborghini"). Thus Spring wires the Primary bean to this Object.
+         */
+        this.vehicle = vehicle;
     }
 }

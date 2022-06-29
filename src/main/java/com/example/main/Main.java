@@ -32,7 +32,8 @@ public class Main {
             To overcome this we need to specify the bean name as well as its type in the getBean method.
          */
         Vehicle vehicle1 = context.getBean("BMW_Car", Vehicle.class);
-        System.out.println("Vehicle name from the Spring Context is : " + vehicle1.getName());
+        System.out.println("Vehicle name from the Spring Context is : " + vehicle1.getName() +
+                ", Registration number : " + vehicle1.getRegistration().getRegistrationNumber());
 
         Vehicle vehicle2 = context.getBean("Lamborghini_Car", Vehicle.class);
         System.out.println("Vehicle name from the Spring Context is : " + vehicle2.getName() +

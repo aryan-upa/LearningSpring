@@ -24,10 +24,11 @@ public class ProjectConfig {
               adds the returned value to the context.
      */
     @Bean(value="BMW_Car")
-    Vehicle vehicle() {
+    Vehicle vehicle(Registration registration) {
         var vehicle  = new Vehicle();
         vehicle.setName("BMW");
-        vehicle.setRegistration(registration());
+        // Auto-Wiring Beans using method parameter
+        vehicle.setRegistration(registration);
         return vehicle;
     }
 
@@ -50,6 +51,7 @@ public class ProjectConfig {
     Vehicle anotherAnotherVehicle() {
         var vehicle = new Vehicle();
         vehicle.setName("Lamborghini");
+        // Auto-Wiring using method call
         vehicle.setRegistration(registration());
         return vehicle;
     }

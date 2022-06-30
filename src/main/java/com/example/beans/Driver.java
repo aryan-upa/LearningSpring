@@ -34,7 +34,6 @@ public class Driver {
 
         But, both of these methods are not Production Grade.
      */
-    @Autowired()
     private final Vehicle vehicle;
 
     public void setName(String name) {
@@ -67,6 +66,16 @@ public class Driver {
         System.out.println("Driver is going home now.");
     }
 
+    /*
+        Defining @Autowired annotation on top of a constructor does have some benefits over the other 2 approaches as
+        with use of this we can create final fields in our class and set them in our constructor.
+
+        After Spring 4.3 :
+            When we have only one constructor we may or may not have the @Autowired configured because it will work
+            internally, but when we have multiple constructors in our Java class then we have to have @Autowired in our
+            class.
+     */
+    @Autowired
     Driver(Vehicle vehicle) {
         /*
             In our case there is no 'NoUniqueBeanDefinitionException', as although there are multiple beans of vehicle

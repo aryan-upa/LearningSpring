@@ -1,6 +1,7 @@
 package com.example.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -74,12 +75,71 @@ public class Driver {
             When we have only one constructor we may or may not have the @Autowired configured because it will work
             internally, but when we have multiple constructors in our Java class then we have to have @Autowired in our
             class.
+
+
+        How does Autowiring takes place if there are more than one bean, or beans are identified by their names, or how
+        does the programmer will set the autowiring configuration to use a particular type of bean.
+
+        By default, Spring tries to autowire with class type. But this approach will fail if the same class type has
+        multiple beans.
+
+        In example in our system there are three beans of Vehicle class
+
+        @Bean("vehicle1")
+        Vehicle vehicle1(){...}
+
+        @Bean("vehicle2")
+        Vehicle vehicle2(){...}
+
+        @Primary
+        @Bean("vehicle3")
+        Vehicle vehicle3(){...}
+
+        Method1 : (Using parameter name / field name)
+            In this method Spring will try to auto-wire based on the parameter name/field name that we use while
+            configuring autowiring annotation.
+
+            Example :
+                This Constructor will autowire to vehicle1 bean in the system.
+
+                @Autowired
+                public Person(Vehicle vehicle1) {
+                    this.vehicle = vehicle1
+                }
+
+        Method2 : (@Primary Bean)
+            In this method if the bean is not found from method1, then the constructor will wire the object with the
+            bean which has @Primary annotation, or the primary bean.
+
+            Example :
+                This Constructor will autowire to vehicle3 bean in the system.
+
+                @Autowired
+                public Person(Vehicle vehicle) {
+                    this.vehicle = vehicle;
+                }
+
+        Method3 : (@Qualifier Bean)
+            In this step the Spring will look for a bean which matches with the name given in @Qualifier annotation in
+            the constructor. The Spring will look for an exact match if nothing works from method1 & method2.
+
+            Example :
+                This Constructor will autowire to vehicle1 bean in the system. [Consider no @Primary bean]
+
+                @Autowired
+                public Person(@Qualifier("vehicle1") Vehicle vehicle) {
+                    this.vehicle = vehicle;
+                }
+
      */
     @Autowired
-    Driver(Vehicle vehicle) {
+    Driver(@Qualifier("BMW_Car") Vehicle vehicle) {
         /*
             In our case there is no 'NoUniqueBeanDefinitionException', as although there are multiple beans of vehicle
             type, we have a @Primary bean ("Lamborghini"). Thus Spring wires the Primary bean to this Object.
+
+            Now, as we have defined the name of the Bean we are looking for, thus we have the bean of vehicle as
+            "Vehicle_BMW".
          */
         this.vehicle = vehicle;
     }

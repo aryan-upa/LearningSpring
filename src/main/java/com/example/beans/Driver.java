@@ -28,6 +28,11 @@ public class Driver {
         If in any-case we have no issue in bean not forming until the time of creation of Driver Bean, ie the presence
         of Vehicle bean is not mandatory then we can annotate the field with @Autowired but with required flag set to
         false.
+
+        We can also use the @Autowired annotation on the setter method of the field, these are just two different
+        methods of using the @Autowired annotation but has no such difference.
+
+        But, both of these methods are not Production Grade.
      */
     @Autowired()
     private final Vehicle vehicle;

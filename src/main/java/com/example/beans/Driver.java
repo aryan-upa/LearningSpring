@@ -2,6 +2,8 @@ package com.example.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +14,20 @@ import javax.annotation.PreDestroy;
                  should be created and make present in the Spring IOC Container. The other method of creating a bean is
                  very verbose as we have to define method in the ProjectConfig class and creating those methods for 100s
                   of classes is very tedious and error-prone.
+    @Scope     : This annotation is used to define the scope of the bean inside the Spring IOC Container. This comes
+                 into picture in the production scenarios when there are multiple threads running inside the system and
+                 multiple Users using the System concurrently, then how the Spring will understand the dependencies. And
+                  how these dependencies will be managed. Bean scope determines how the spring IOC Container will create
+                  a new bean when asked, will it give the reference to the old bean or a new bean will be created.
+
+                 There are total 5 Types of scopes:
+                    1. Singleton        [ Default Scope ]
+                    2. Prototype
+                    3. Request          --|
+                    4. Session          --+--> Web-Based
+                    5. Application      --|
+
+
  */
 @Component
 public class Driver {

@@ -77,6 +77,9 @@ import javax.annotation.PreDestroy;
                     will always refer to the same Prototype bean as the Parent is fixed so the reference will be fixed.
 
                     @Scope(BeanDefinition.SCOPE_PROTOTYPE) -> To set the bean as of Prototype scope.
+
+                    In Prototype Bean Scope, there is no concept of Eager Initialization. The Bean will always be
+                    created when it is required.
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)

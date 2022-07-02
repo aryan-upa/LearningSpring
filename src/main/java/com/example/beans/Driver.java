@@ -48,6 +48,20 @@ import javax.annotation.PreDestroy;
                         that whatever bean is used in a singleton scope, there must be no updates or deletion in data
                         in that bean. Because if it has, then we may have to apply Locking and Synchronization in
                         updates and deletion.
+
+                    Where to use Singleton beans :
+                        Since the same instance of bean will be used by multiple threads inside your application, it is
+                        very important that these beans are immutable.
+
+                        This cope is more suitable for beans which handles service layer, repository layer or business
+                        logic. These beans should be made of classes which have only methods inside them but not Data.
+                        Because if at any moment two threads concurrently try to access the bean, it will result in race
+                         condition.
+
+                        There are always ways to avoid race conditions due to mutable singleton beans with the help of
+                        synchronization, But it is not recommended as it brings a lot of complexity and performance
+                        issues.
+
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)

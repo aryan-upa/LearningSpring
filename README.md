@@ -17,7 +17,7 @@ The Spring follows *Inversion of Control* **(IOC)** design principle, independen
 rather it describes the way in which the object is created.
 
 Spring follows the *Dependency Injection* **(DI)** design pattern through which the **Inversion of Control** is achieved. With Dependency Injection the 
-responsibility of creating objects was shifted from Application to the Spring IOC Container, these is the main reason why spring is so celebrated framework
+responsibility of creating objects was shifted from Application to the Spring IOC Container, these are the main reason why spring is so celebrated framework
 among the Java Developers.
 
 ## Projects Maintained by Spring :

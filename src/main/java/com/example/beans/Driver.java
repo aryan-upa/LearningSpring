@@ -27,9 +27,16 @@ import javax.annotation.PreDestroy;
                     4. Session          --+--> Web-Based
                     5. Application      --|
 
+                 1. Singleton Scope:
+                    When we have a bean inside our application, and we try to refer it using any method. We always get
+                    the same instance of the bean. Similar to singleton design pattern. In singleton bean scope, we can
+                    have multiple beans of same data-type only when they arise from different beans. I.e. we can have 1
+                    instance per unique bean in our system.
 
+                    @Scope(BeanDefinition.SCOPE_SINGLETON) -> To create a bean's scope singleton.
  */
 @Component
+@Scope(BeanDefinition.SCOPE_SINGLETON)
 public class Driver {
     private String name;
 

@@ -62,6 +62,21 @@ import javax.annotation.PreDestroy;
                         synchronization, But it is not recommended as it brings a lot of complexity and performance
                         issues.
 
+                 2. Prototype Scope :
+                    With this scope, everytime we request a reference of bean, Spring will create a new Object instance
+                    and provide the same. This scope is rarely used inside the applications, and we can use this scope
+                    only in the scenario where your bean will frequently change the state of sata which will result in
+                    race conditions inside multithreaded environments. Using prototype scope will not create any race
+                    conditions.
+
+                    This type of scope is usable when our bean holds some data and that data is subjected to a lot of
+                    manipulation. Then, we can make the scope as Prototype.
+
+                    This means that whenever we will try to fetch an instance of the bean, a new instance will be given.
+                    But, in case a Prototype bean is defined inside a Singleton bean. In that case that singleton bean
+                    will always refer to the same Prototype bean as the Parent is fixed so the reference will be fixed.
+
+                    @Scope(BeanDefinition.SCOPE_PROTOTYPE) -> To set the bean as of Prototype scope.
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)

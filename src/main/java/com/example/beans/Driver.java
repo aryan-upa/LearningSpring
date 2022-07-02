@@ -34,6 +34,20 @@ import javax.annotation.PreDestroy;
                     instance per unique bean in our system.
 
                     @Scope(BeanDefinition.SCOPE_SINGLETON) -> To create a bean's scope singleton.
+
+                    Issue with incorrect usage of Singleton Scope : Race Condition :
+                        A race condition occurs when two threads access a shared variable at the same time. The first
+                        thread reads teh variable, and the second thread reads the same value from the variable. Then
+                        the first thread and second thread perform their operations on the value, and they race to see
+                        which thread can write the value last to the shared variable. The value of the thread that
+                        writes its value last is preserved, because the thread is writing over the value that the
+                        previous thread wrote.
+
+                        If we have a single object instance in our application and multiple threads are trying to access
+                         it, then there's good chance that it may lead to race condition. To avoid this, we make sure
+                        that whatever bean is used in a singleton scope, there must be no updates or deletion in data
+                        in that bean. Because if it has, then we may have to apply Locking and Synchronization in
+                        updates and deletion.
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)

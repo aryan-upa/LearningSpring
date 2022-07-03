@@ -33,17 +33,10 @@ public class VehicleServices {
     }
 
     public void doPlay(boolean isVehicleStarted, Song song){
-        if(isVehicleStarted)
-            musicSystem.makeSound(song);
-        else
-            logger.log(Level.SEVERE, "Unable to execute getMusicSystem() method!!");
+        musicSystem.makeSound(song);
     }
 
     public void doDrive(boolean isVehicleStarted) {
-        if(isVehicleStarted)
-            tyre.rotate(true);
-        else
-            logger.log(Level.SEVERE, "Unable to execute drive() method!!");
-
+        tyre.rotate(true);
     }
 }

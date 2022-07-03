@@ -10,7 +10,7 @@ public class Bose implements Speakers {
 
     @Override
     public void makeSound(Song song) {
-        System.out.println("Now Playing : " + song.getName() + "\nBy : " + song.getArtist());
+        System.out.println("Now Playing : " + song.name() + "\nBy : " + song.artist());
     }
 
     @Override

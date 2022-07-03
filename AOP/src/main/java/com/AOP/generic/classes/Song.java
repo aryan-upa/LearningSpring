@@ -1,6 +1,6 @@
 package com.AOP.generic.classes;
 
-public class Song {
+public record Song(String name, String artist) {
 
     /*
         Aspect Oriented Programming :
@@ -65,22 +65,21 @@ public class Song {
                                 |-----------------------|                      |                     |
                                                                                |=====================|
 
+        Types of Advice in AOP :
+            @Before : It makes sure that the aspect logic runs before the matched method execution.
+
+            @AfterReturning : This makes sure that the advice runs when a matched method execution completes normally.
+
+            @AfterThrowing : This advice runs the aspect logic after and if the matched method execution exits by
+                    throwing an Exception.
+
+            @After : This makes the advice runs no matter how a matched method execution exits.
+
+            @Around : This advice makes the aspect runs "around" a matched method execution. It has the opportunity to
+                    do work both before and after the method runs and to determine, how, and even if the method actually
+                     gets to run at all.
+
 
      */
 
-    private final String name;
-    private final String artist;
-
-    public Song(String name, String artist) {
-        this.name = name;
-        this.artist = artist;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getArtist() {
-        return artist;
-    }
 }

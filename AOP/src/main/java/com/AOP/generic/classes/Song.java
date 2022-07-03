@@ -79,6 +79,49 @@ public record Song(String name, String artist) {
                     do work both before and after the method runs and to determine, how, and even if the method actually
                      gets to run at all.
 
+        Configuring Advices inside AOP :
+
+            In the configuration file we need to use @EnableAspectJAutoProxy to be able to use the Aspect Behaviour.
+            Similarly, on the classes in which we define our Aspect logic we have to use @Aspect annotation.
+
+            While defining a method in the Aspect logic class, we have to use the Advice type with methods.
+            Ex:
+
+                @Around("execution( --regex pattern defining what methods to execute on-- )")
+                public void log (ProceedingJoinPoint joinPoint) throws Throwable {
+                    // Aspect Logic
+                }
+
+            We can use the AspectJ pointcut expression to provide details to Spring about what kind of methods it needs
+            to intercept by mentioning details around modifier, return type, package name pattern, params pattern,
+            exceptions pattern etc.
+
+            Format, Execution Expression Pattern
+                    ? -> this represents that this is optional. These work in the form of regex.
+
+                           Used to define                          This tells the Spring    Used to define any name
+                          method modifiers     Used to define       framework that what     pattern, package pattern,
+                            like public,     the desired return   packages or what method     params pattern of the
+                              private.       type of the method.   should be intercepted.            method.
+                          ________|________  _______|________     ___________|___________  _____________|_____________
+                execution(modifiers-pattern? ret-type-pattern     declaring-type-pattern?  name-pattern(param-pattern)
+                throws-pattern?)
+                """""""|""""""""
+                Used to define the
+            specific exception pattern
+               that can be thrown by
+                    the method.
+
+            Ex:
+                @Around("execution(* com.example.services.*.*(..))")
+
+                This defines -> to execute in around advice in all the methods with
+                        -- any access modifier defined ( not written )
+                        -- with any return type ( * )
+                        -- in com.example.services package inside any class ( com.example.services.*. )
+                        -- with any name ( *. )
+                        -- with any param-pattern ( (..) )
+                        -- with any throws pattern ( not written )
 
      */
 

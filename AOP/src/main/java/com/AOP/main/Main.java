@@ -13,8 +13,8 @@ public class Main {
         person.setName("Aryan Upadhyay");
         boolean isVehicleStarted = true;
         Song song = new Song("Ontario", "Novo Amor");
-        person.getVehicle().getVehicleServices().play(isVehicleStarted, song);
-        person.getVehicle().getVehicleServices().drive(isVehicleStarted);
+        person.getVehicle().getVehicleServices().doPlay(isVehicleStarted, song);
+        person.getVehicle().getVehicleServices().doDrive(isVehicleStarted);
 
         System.out.println(person);
     }

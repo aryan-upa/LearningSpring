@@ -43,6 +43,29 @@ public class Song {
             """""""|""""""
              Target Object
 
+        Weaving Inside AOP :
+            When we are implementing AOP inside our App using Spring Framework, it will intercept each method call and
+            apply the logic defined in the Aspect.
+
+            Spring does this with the help of proxy object, So we try to invoke a method inside a bean, Spring instead
+            of directly giving reference of the bean instead it will give a proxy object that will manage each call to a
+             method and apply the aspect logic. This process is called weaving.
+
+
+             Without AOP, method is directly called and no interception by     |=====================|
+                                     Spring                                    |                     |
+            ------------------------------------------------------------------>|   VehicleServices   |
+                                                                               |       Bean          |
+                                                                               |                     |
+                                                                               | void playMusic() {  |
+                                |-----------------------|                      |   // Business       |
+                Intercept       |    Proxy Object of    |     Delegation       |   // logic          |
+            ------------------->|    VehicleServices    |--------------------->| }                   |
+                                |         Bean          |                      |                     |
+                                |-----------------------|                      |                     |
+                                                                               |=====================|
+
+
      */
 
     private final String name;

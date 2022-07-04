@@ -32,11 +32,13 @@ public class VehicleServices {
         return musicSystem;
     }
 
-    public void doPlay(boolean isVehicleStarted, Song song){
+    public String doPlay(boolean isVehicleStarted, Song song){
         musicSystem.makeSound(song);
+        return "Method Successful!!";
     }
 
-    public void doDrive(boolean isVehicleStarted) {
+    public String doDrive(boolean isVehicleStarted) {
         tyre.rotate(true);
+        return "Method Successful!!";
     }
 }

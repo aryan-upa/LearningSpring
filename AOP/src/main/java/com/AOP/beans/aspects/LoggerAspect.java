@@ -25,8 +25,7 @@ public class LoggerAspect {
         We are using regex to define a single-single methods in the VehicleServices class
         to use 2 different functions in regex, we are using '||' Or operator.
      */
-    @Around("execution(* com.AOP.beans.vehicleServices.VehicleServices.doDrive(..)) || " +
-            "execution(* com.AOP.beans.vehicleServices.VehicleServices.doPlay(..))")
+    @Around("@annotation(com.AOP.annotations.LogAspect)")
     public void log(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info(joinPoint.getSignature().toString() + " method execution start.");
         Instant start = Instant.now();
@@ -39,14 +38,14 @@ public class LoggerAspect {
         logger.info(joinPoint.getSignature().toString() + " method execution ended.");
     }
 
-    @AfterThrowing(value = "execution(* com.AOP.beans.vehicleServices.VehicleServices.do*(..))", throwing = "ex")
+    @AfterThrowing(value = "@annotation(com.AOP.annotations.LogException)", throwing = "ex")
     public void logException(JoinPoint joinPoint, Exception ex) {
         logger.log(Level.SEVERE, joinPoint.getSignature() +
                 "Unable to execute method due to " +
                 ex.getMessage());
     }
 
-    @AfterReturning(value = "execution(* com.AOP.beans.vehicleServices.VehicleServices.do*(..))", returning = "retVal")
+    @AfterReturning(value = "@annotation(com.AOP.annotations.LogCompletion)", returning = "retVal")
     public void logCompletion(JoinPoint joinPoint, Object retVal) {
         logger.info(joinPoint.getSignature() + " Method Executed Successfully with return Value " + retVal);
     }

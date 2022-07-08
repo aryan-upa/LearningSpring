@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -23,19 +22,21 @@ public class HolidayController {
                 new Holiday("2 Oct", "Mahatma Gandhi's Birthday", Holiday.Type.CENTRAL),
                 new Holiday("24 Nov", "Guru Teg Bahadur Martyrdom Day", Holiday.Type.STATE),
                 new Holiday("25 Dec", "Christmas", Holiday.Type.FESTIVAL),
-                new Holiday("Dec 31st", "Last Working Day of Year", Holiday.Type.FESTIVAL)
+                new Holiday("31 Dec", "Last Working Day of Year", Holiday.Type.FESTIVAL)
         );
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {
             model.addAttribute(type.toString(),
                     holidayList
                             .stream()
-                            .filter(Holiday -> Holiday.getType().equals(type))
+                            .filter(isHolidayType(type))
                             .collect(Collectors.toList()));
         }
-
         return "/holidays";
+    }
 
+    public static Predicate<Holiday> isHolidayType(Holiday.Type type) {
+        return holiday -> holiday.getType().equals(type);
     }
 
 }

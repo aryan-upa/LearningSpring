@@ -2,12 +2,17 @@ package com.LearningSpring.SchoolProject.controller;
 
 import com.LearningSpring.SchoolProject.model.Contact;
 import com.LearningSpring.SchoolProject.service.ContactService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
@@ -23,7 +28,9 @@ public class ContactController {
     }
 
     @RequestMapping("/contact")
-    public String displayContactPage() {
+    public String displayContactPage(Model model) {
+        // Added the contact POJO object to the frontend.
+        model.addAttribute("contact", new Contact());
         return "contact.html";
     }
 
@@ -45,12 +52,16 @@ public class ContactController {
         controller class. Then we send our data to the Service layer for further processing & use.
      */
     @PostMapping("/saveMsg") // OR @RequestMapping("/saveMsg", Method = POST)
-    public ModelAndView saveMessage(Contact contact) {
-        boolean isMessageSaved = contactService.saveMessageDetails(contact);
-        if (isMessageSaved)
-            return new ModelAndView("redirect:/contact?saved=true");
-        else
-            return new ModelAndView("redirect:/contact?saved=false");
+    public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {
+        // Errors parameter is to take errors from the frontend and display them in the backend.
+        if(errors.hasErrors()) {
+            log.log(Level.SEVERE, "Form Validation failed due to " + errors);
+            // returning with "/contact" reloads the page but keeps the data intact.
+            return "/contact";
+        }
+        contactService.saveMessageDetails(contact);
+        // returning with "redirect:/contact" not only reloads the page but also removes the previous data in the page.
+        return "redirect:/contact";
     }
 
 }

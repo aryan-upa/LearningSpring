@@ -12,7 +12,9 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().ignoringAntMatchers("/saveMsg")
+                .csrf()
+                .ignoringAntMatchers("/saveMsg")
+                .ignoringAntMatchers("/h2-console/**")
                 .and().authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
                 .mvcMatchers("/home").permitAll()
@@ -21,6 +23,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/saveMsg").permitAll()
                 .mvcMatchers("/courses").permitAll()
                 .mvcMatchers("/about").permitAll()
+                .mvcMatchers("/h2-console/**").permitAll()
                 .and().formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/dashboard")
@@ -29,6 +32,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout=true")
                 .invalidateHttpSession(true).permitAll()
                 .and().httpBasic();
+
+        http.headers().frameOptions().disable();
     }
 
     @Override

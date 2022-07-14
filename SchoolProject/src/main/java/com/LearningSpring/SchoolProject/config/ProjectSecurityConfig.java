@@ -41,7 +41,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user").password("12345").roles("USER")
                 .and()
-                .withUser("admin").password("admin").roles("USER", "ADMIN")
+                .withUser("admin").password("admin").roles("ADMIN")
                 .and()
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }

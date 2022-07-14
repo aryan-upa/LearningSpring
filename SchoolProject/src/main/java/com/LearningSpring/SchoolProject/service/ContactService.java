@@ -6,6 +6,7 @@ import com.LearningSpring.SchoolProject.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -36,4 +37,8 @@ public class ContactService {
         return isSaved;
     }
 
+    public List<Contact> findMsgsWithOpenStatus() {
+        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(NewAgeSchoolConstants.OPEN);
+        return contactMsgs;
+    }
 }

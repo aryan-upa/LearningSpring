@@ -1,9 +1,12 @@
 package com.LearningSpring.SchoolProject.repository;
 
 import com.LearningSpring.SchoolProject.model.Contact;
+import com.LearningSpring.SchoolProject.rowMappers.ContactRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
 public class ContactRepository {
@@ -30,4 +33,8 @@ public class ContactRepository {
                 contact.getCreatedBy());
     }
 
+    public List<Contact> findMsgsWithStatus(String status) {
+        String sql = "select * from contact_msg where status = ?";
+        return jdbcTemplate.query(sql, (PreparedStatementSetter) ps -> ps.setString(1, status), new ContactRowMapper());
+    }
 }

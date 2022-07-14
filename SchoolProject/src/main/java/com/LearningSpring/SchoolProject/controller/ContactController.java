@@ -10,7 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,14 +52,12 @@ public class ContactController {
      */
     @PostMapping("/saveMsg") // OR @RequestMapping("/saveMsg", Method = POST)
     public String saveMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {
-        // Errors parameter is to take errors from the frontend and display them in the backend.
         if(errors.hasErrors()) {
             log.log(Level.SEVERE, "Form Validation failed due to " + errors);
-            // returning with "/contact" reloads the page but keeps the data intact.
             return "/contact";
         }
+
         contactService.saveMessageDetails(contact);
-        // returning with "redirect:/contact" not only reloads the page but also removes the previous data in the page.
         return "redirect:/contact";
     }
 

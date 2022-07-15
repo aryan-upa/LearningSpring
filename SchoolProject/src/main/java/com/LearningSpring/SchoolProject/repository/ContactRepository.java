@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -36,5 +41,18 @@ public class ContactRepository {
     public List<Contact> findMsgsWithStatus(String status) {
         String sql = "select * from contact_msg where status = ?";
         return jdbcTemplate.query(sql, (PreparedStatementSetter) ps -> ps.setString(1, status), new ContactRowMapper());
+    }
+
+    public int updateMsgStatus(int contactID, String close, String updatedBy) {
+        String sql = "update contact_msg set status = ?, updated_by = ?, updated_at = ? where contact_id = ?";
+        return jdbcTemplate.update(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setString(1, close);
+                ps.setString(2, updatedBy);
+                ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                ps.setInt(4, contactID);
+            }
+        });
     }
 }

@@ -1,6 +1,8 @@
 package com.LearningSpring.SchoolProject.controller;
 
 import com.LearningSpring.SchoolProject.model.Holiday;
+import com.LearningSpring.SchoolProject.repository.HolidayRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class HolidayController {
+
+    @Autowired
+    private HolidayRepository holidayRepository;
 
     @GetMapping("/holidays/{display}")
     public String displayHolidays(@PathVariable(name = "display") String toDisplay, Model model) {
@@ -25,16 +30,8 @@ public class HolidayController {
                 model.addAttribute(toDisplay, true);
         }
 
-        List<Holiday> holidayList = List.of(
-                new Holiday("1 Jan", "New Year's Day", Holiday.Type.FESTIVAL),
-                new Holiday("26 Jan", "Republic Day", Holiday.Type.CENTRAL),
-                new Holiday("15 Apr", "Good Friday", Holiday.Type.FESTIVAL),
-                new Holiday("15 Aug", "Independence Day", Holiday.Type.CENTRAL),
-                new Holiday("2 Oct", "Mahatma Gandhi's Birthday", Holiday.Type.CENTRAL),
-                new Holiday("24 Nov", "Guru Teg Bahadur Martyrdom Day", Holiday.Type.STATE),
-                new Holiday("25 Dec", "Christmas", Holiday.Type.FESTIVAL),
-                new Holiday("31 Dec", "Last Working Day of Year", Holiday.Type.FESTIVAL)
-        );
+        List<Holiday> holidayList = holidayRepository.getAllHolidays();
+
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {
             model.addAttribute(type.toString(),

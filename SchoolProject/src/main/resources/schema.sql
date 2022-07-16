@@ -1,3 +1,7 @@
+create database newschool;
+
+use newschool;
+
 create table if not exists `contact_msg` (
     `contact_id` int AUTO_INCREMENT PRIMARY KEY,
     `name` varchar(100) not null,

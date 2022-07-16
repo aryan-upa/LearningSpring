@@ -24,8 +24,7 @@ public class ContactRepository {
     }
 
     public int saveContactMsg(Contact contact) {
-        String sql = "INSERT INTO CONTACT_MSG (NAME,MOBILE_NUM,EMAIL,SUBJECT,MESSAGE,STATUS," +
-                "CREATED_AT,CREATED_BY) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "insert into contact_msg (name, mobile_num, email, subject, message, status, created_at, created_by) values(?,?,?,?,?,?,?,?);";
         return jdbcTemplate.update(
                 sql,
                 contact.getName(),

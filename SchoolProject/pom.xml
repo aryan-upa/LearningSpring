@@ -54,7 +54,7 @@
 		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
 
 <!--		&lt;!&ndash; H2 Database dependency &ndash;&gt;-->
@@ -65,10 +65,10 @@
 <!--		</dependency>-->
 
 		<!-- JPA Dependency -->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
 		<!-- Spring JDBC Dependency -->
 		<dependency>
@@ -99,7 +99,7 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
         </dependency>
-    </dependencies>
+	</dependencies>
 
 <!--	<build>-->
 <!--		<plugins>-->

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
 public class HolidayController {
@@ -30,7 +31,9 @@ public class HolidayController {
                 model.addAttribute(toDisplay, true);
         }
 
-        List<Holiday> holidayList = holidayRepository.getAllHolidays();
+        List<Holiday> holidayList = StreamSupport
+                .stream(holidayRepository.findAll().spliterator(), false) // as we recieved an iterable we have to change it to a list.
+                .toList();
 
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {

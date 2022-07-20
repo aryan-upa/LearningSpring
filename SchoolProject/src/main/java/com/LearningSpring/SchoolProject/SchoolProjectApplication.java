@@ -1,7 +1,10 @@
 package com.LearningSpring.SchoolProject;
 
+import jakarta.persistence.Entity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /*
 	For excluding any class from automatically generating beans by the Spring framework. We can use the "exclude list"
@@ -20,6 +23,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
+@EnableJpaRepositories("com.LearningSpring.SchoolProject.repository")
+@EntityScan("com.LearningSpring.SchoolProject.model")
 public class SchoolProjectApplication {
 
 	public static void main(String[] args) {

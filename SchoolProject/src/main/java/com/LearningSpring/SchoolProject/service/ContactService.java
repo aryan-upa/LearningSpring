@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
@@ -27,25 +28,35 @@ public class ContactService {
      * @return boolean Returns whether the data was saved or not.
      */
     public boolean saveMessageDetails(Contact contact) {
-        boolean isSaved = true;
+        boolean isSaved = false;
         contact.setStatus(NewAgeSchoolConstants.OPEN);
         contact.setCreatedBy(NewAgeSchoolConstants.ANONYMOUS);
         contact.setCreatedAt(LocalDateTime.now());
 
-        int result = contactRepository.saveContactMsg(contact);
-        isSaved = result > 0;
+        Contact savedContact = contactRepository.save(contact);
+        if (savedContact.getContactID() > 0)
+            isSaved = true;
         return isSaved;
     }
 
     public List<Contact> findMsgsWithOpenStatus() {
-        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(NewAgeSchoolConstants.OPEN);
+        List<Contact> contactMsgs = contactRepository.findByStatus(NewAgeSchoolConstants.OPEN);
         return contactMsgs;
     }
 
     public boolean updateMsgStatus(int contactID, String updatedBy) {
         boolean isUpdated = false;
-        int result = contactRepository.updateMsgStatus(contactID, NewAgeSchoolConstants.CLOSE, updatedBy);
-        isUpdated = result > 0;
+        Optional<Contact> contactOptional = contactRepository.findById(contactID);
+        contactOptional.ifPresent(
+                contact -> {
+                    contact.setUpdatedAt(LocalDateTime.now());
+                    contact.setUpdatedBy(updatedBy);
+                    contact.setStatus(NewAgeSchoolConstants.CLOSE);
+                });
+        if(contactOptional.isPresent()) {
+            Contact updatedContact = contactRepository.save(contactOptional.get());
+            isUpdated = true;
+        }
         return isUpdated;
     }
 }

@@ -1,9 +1,15 @@
 package com.LearningSpring.SchoolProject.model;
 
-import lombok.Data;
+import jakarta.persistence.MappedSuperclass;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@MappedSuperclass
 public class BaseEntity {
 
     private LocalDateTime createdAt;

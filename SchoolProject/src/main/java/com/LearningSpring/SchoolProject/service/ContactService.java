@@ -30,8 +30,6 @@ public class ContactService {
     public boolean saveMessageDetails(Contact contact) {
         boolean isSaved = false;
         contact.setStatus(NewAgeSchoolConstants.OPEN);
-        contact.setCreatedBy(NewAgeSchoolConstants.ANONYMOUS);
-        contact.setCreatedAt(LocalDateTime.now());
 
         Contact savedContact = contactRepository.save(contact);
         if (savedContact.getContactID() > 0)
@@ -44,13 +42,11 @@ public class ContactService {
         return contactMsgs;
     }
 
-    public boolean updateMsgStatus(int contactID, String updatedBy) {
+    public boolean updateMsgStatus(int contactID) {
         boolean isUpdated = false;
         Optional<Contact> contactOptional = contactRepository.findById(contactID);
         contactOptional.ifPresent(
                 contact -> {
-                    contact.setUpdatedAt(LocalDateTime.now());
-                    contact.setUpdatedBy(updatedBy);
                     contact.setStatus(NewAgeSchoolConstants.CLOSE);
                 });
         if(contactOptional.isPresent()) {

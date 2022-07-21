@@ -44,6 +44,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("admin").password("admin").roles("ADMIN")
                 .and()
+                .withUser("aryan").password("aryan").roles("ADMIN")
+                .and()
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 }

@@ -14,6 +14,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf()
                 .ignoringAntMatchers("/saveMsg")
+                .ignoringAntMatchers("/public/**")
                 .ignoringAntMatchers("/h2-console/**")
                 .and().authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
@@ -24,6 +25,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/saveMsg").permitAll()
                 .mvcMatchers("/courses").permitAll()
                 .mvcMatchers("/about").permitAll()
+                .mvcMatchers("/public/**").permitAll()
                 .mvcMatchers("/h2-console/**").permitAll()
                 .and().formLogin()
                 .loginPage("/login")

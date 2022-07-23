@@ -54,7 +54,7 @@ create table if not exists `person` (
     `person_id` int not null auto_increment,
     `name` varchar(100) not null,
     `email` varchar(50) not null ,
-    `phone_number` int not null ,
+    `phone_number` varchar(15) not null ,
     `pwd` varchar(50) not null ,
     `role_id` int not null ,
     `address_id` int null ,

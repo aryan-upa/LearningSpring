@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,9 +20,12 @@ import java.util.List;
 public class NewAgeSchoolAuthenticationProvider implements AuthenticationProvider {
 
     private final PersonRepository personRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public NewAgeSchoolAuthenticationProvider(PersonRepository personRepository) {
+    public NewAgeSchoolAuthenticationProvider(PersonRepository personRepository,
+                                              PasswordEncoder passwordEncoder) {
         this.personRepository = personRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -33,10 +37,10 @@ public class NewAgeSchoolAuthenticationProvider implements AuthenticationProvide
             throw new BadCredentialsException("user does not exist.");
         if (person.getPersonId() < 0)
             throw new BadCredentialsException("Invalid User");
-        if(!person.getPwd().equals(pwd))
+        if(!passwordEncoder.matches(pwd, person.getPwd()))
             throw new BadCredentialsException("Invalid UserID or Password!");
         return new UsernamePasswordAuthenticationToken(
-                person.getName(), pwd, getGrantedAuthorities(person.getRoles())
+                person.getName(), null, getGrantedAuthorities(person.getRoles())
         );
     }
 
@@ -50,4 +54,5 @@ public class NewAgeSchoolAuthenticationProvider implements AuthenticationProvide
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
+
 }

@@ -55,7 +55,7 @@ create table if not exists `person` (
     `name` varchar(100) not null,
     `email` varchar(50) not null ,
     `phone_number` varchar(15) not null ,
-    `pwd` varchar(50) not null ,
+    `pwd` varchar(150) not null ,
     `role_id` int not null ,
     `address_id` int null ,
     `created_at` timestamp not null ,

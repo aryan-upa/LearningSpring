@@ -7,5 +7,8 @@ values ('1 Jan', 'New Year''s Day', 'FESTIVAL', CURDATE(), 'DBA'),
        ('24 Nov', 'Guru Teg Bahadur Martyrdom Day', 'STATE', CURDATE(), 'DBA'),
        ('25 Dec', 'Christmas', 'FESTIVAL', CURDATE(), 'DBA');
 
-insert into `roles` (`role_name`, `created_at`, `created_by`) values("ADMIN", CURDATE(), "DBA");
-insert into `roles` (`role_name`, `created_at`, `created_by`) values("STUDENT", CURDATE(), "DBA");
+insert into `roles` (`role_name`, `created_at`, `created_by`) values('ADMIN', CURDATE(), 'DBA');
+insert into `roles` (`role_name`, `created_at`, `created_by`) values('STUDENT', CURDATE(), 'DBA');
+
+insert into `person` (name, email, phone_number, pwd, role_id, address_id, created_at, created_by)
+values ('admin', 'admin@gla.ac.in', '1234456789', 'admin', 1, null, CURDATE(), 'DBA');

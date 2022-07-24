@@ -30,7 +30,7 @@ public class NewAgeSchoolAuthenticationProvider implements AuthenticationProvide
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
+        String username = authentication.getName(); // email was provided here.
         String pwd = authentication.getCredentials().toString();
         Person person = personRepository.readByEmail(username);
         if (person == null)
@@ -40,7 +40,7 @@ public class NewAgeSchoolAuthenticationProvider implements AuthenticationProvide
         if(!passwordEncoder.matches(pwd, person.getPwd()))
             throw new BadCredentialsException("Invalid UserID or Password!");
         return new UsernamePasswordAuthenticationToken(
-                person.getName(), null, getGrantedAuthorities(person.getRoles())
+                username, null, getGrantedAuthorities(person.getRoles()) // this authentication let us identify user all around the application.
         );
     }
 
